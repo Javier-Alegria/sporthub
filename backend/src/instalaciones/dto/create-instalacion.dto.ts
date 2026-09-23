@@ -22,10 +22,14 @@ export class CreateInstalacionDto {
 
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
+  @MaxLength(50)
   tipo: string;
 
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
+  @MaxLength(100)
   ubicacion: string;
 
   @IsNotEmpty()

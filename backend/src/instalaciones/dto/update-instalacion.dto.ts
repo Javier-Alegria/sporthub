@@ -3,12 +3,16 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  MaxLength,
   Min,
+  MinLength,
 } from 'class-validator';
 
 export class UpdateInstalacionDto {
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(100)
   nombre?: string;
 
   @IsOptional()
