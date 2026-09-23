@@ -17,6 +17,8 @@ export class UpdateInstalacionDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(500)
   descripcion?: string;
 
   @IsOptional()
@@ -33,7 +35,7 @@ export class UpdateInstalacionDto {
 
   @IsOptional()
   @IsNumber()
-  @Min(0)
+  @Min(0.01)
   precioHora?: number;
 
   @IsOptional()
