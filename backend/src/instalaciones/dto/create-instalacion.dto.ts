@@ -30,7 +30,7 @@ export class CreateInstalacionDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @Min(0)
+  @Min(0.01)
   precioHora: number;
 
   @IsOptional()
