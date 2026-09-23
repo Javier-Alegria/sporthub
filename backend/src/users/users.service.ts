@@ -112,4 +112,14 @@ export class UsersService {
 
     return this.obtenerPorId(id);
   }
+
+  async activarUsuario(id: number): Promise<Omit<User, 'password'>> {
+    const usuario = await this.obtenerPorId(id);
+
+    usuario.activo = true;
+
+    await this.usersRepository.save(usuario);
+
+    return this.obtenerPorId(id);
+  }
 }

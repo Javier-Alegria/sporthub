@@ -48,4 +48,10 @@ export class UsersController {
   desactivarUsuario(@Param('id') id: string) {
     return this.usersService.desactivarUsuario(Number(id));
   }
+
+  @Put(':id/activar')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  activarUsuario(@Param('id') id: string) {
+    return this.usersService.activarUsuario(Number(id));
+  }
   }
