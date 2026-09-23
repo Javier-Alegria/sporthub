@@ -5,6 +5,8 @@ import {
   Post,
   Put,
   Req,
+  Delete,
+  Param,
   UseGuards,
 } from '@nestjs/common';
 
@@ -12,6 +14,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('users')
 export class UsersController {
@@ -39,4 +42,10 @@ export class UsersController {
       userDto,
     );
   }
-}
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  desactivarUsuario(@Param('id') id: string) {
+    return this.usersService.desactivarUsuario(Number(id));
+  }
+  }

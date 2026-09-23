@@ -30,6 +30,11 @@ export class User {
   rol: string;
 
   @Column({
+    default: true,
+  })
+  activo: boolean;
+
+  @Column({
     type: 'datetime',
     default: () => 'CURRENT_TIMESTAMP',
   })

@@ -102,4 +102,14 @@ export class UsersService {
 
     return this.obtenerPorId(id);
   }
+
+  async desactivarUsuario(id: number): Promise<Omit<User, 'password'>> {
+    const usuario = await this.obtenerPorId(id);
+
+    usuario.activo = false;
+
+    await this.usersRepository.save(usuario);
+
+    return this.obtenerPorId(id);
+  }
 }
