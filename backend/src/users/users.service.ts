@@ -1,7 +1,6 @@
 import {
   ConflictException,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
@@ -54,25 +53,5 @@ export class UsersService {
         email,
       },
     });
-  }
-
-  async hacerAdmin(id: number): Promise<Omit<User, 'password'>> {
-    const usuario = await this.usersRepository.findOne({
-      where: {
-        id,
-      },
-    });
-
-    if (!usuario) {
-      throw new NotFoundException('Usuario no encontrado');
-    }
-
-    usuario.rol = 'ADMIN';
-
-    const usuarioActualizado = await this.usersRepository.save(usuario);
-
-    const { password, ...usuarioSinPassword } = usuarioActualizado;
-
-    return usuarioSinPassword;
   }
 }
