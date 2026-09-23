@@ -12,12 +12,18 @@ export class UpdateUserDto {
   @IsString()
   @MinLength(2)
   @MaxLength(50)
+  @Matches(/\S/, {
+    message: 'El nombre no puede estar vacío',
+  })
   nombre?: string;
 
   @IsOptional()
   @IsString()
   @MinLength(2)
   @MaxLength(100)
+  @Matches(/\S/, {
+    message: 'Los apellidos no pueden estar vacíos',
+  })
   apellidos?: string;
 
   @IsOptional()

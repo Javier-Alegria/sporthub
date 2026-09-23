@@ -17,6 +17,9 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  @Matches(/\S/, {
+    message: 'Los apellidos no pueden estar vacíos',
+  })
   apellidos: string;
 
   @IsNotEmpty()
