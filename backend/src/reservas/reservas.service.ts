@@ -47,6 +47,18 @@ export class ReservasService {
       );
     }
 
+    const fechaReserva = new Date(reservaDto.fecha);
+    const hoy = new Date();
+
+    hoy.setHours(0, 0, 0, 0);
+    fechaReserva.setHours(0, 0, 0, 0);
+
+    if (fechaReserva < hoy) {
+      throw new ConflictException(
+        'No se pueden crear reservas para fechas pasadas',
+      );
+    }
+
     const reservaExistente = await this.reservasRepository
       .createQueryBuilder('reserva')
       .where('reserva.instalacionId = :instalacionId', {
