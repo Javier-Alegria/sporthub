@@ -5,13 +5,10 @@ import {
 } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { Repository } from 'typeorm';
 
 import { Reserva } from './entities/reserva.entity';
-
 import { CreateReservaDto } from './dto/create-reserva.dto';
-
 import { Instalacion } from '../instalaciones/entities/instalacion.entity';
 
 @Injectable()
@@ -41,6 +38,12 @@ export class ReservasService {
     if (!instalacion.activa) {
       throw new ConflictException(
         'La instalación no está disponible para reservas',
+      );
+    }
+
+    if (reservaDto.horaInicio >= reservaDto.horaFin) {
+      throw new ConflictException(
+        'La hora de inicio debe ser anterior a la hora de fin',
       );
     }
 
@@ -116,7 +119,7 @@ export class ReservasService {
         horaInicio: 'ASC',
       },
     });
-  } 
+  }
 
   async cancelarReserva(
     reservaId: number,
