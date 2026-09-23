@@ -31,6 +31,19 @@ export class ReservasController {
     );
   }
 
+  @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  obtenerReservaPorId(
+    @Param('id') id: string,
+    @Req() request: any,
+  ) {
+    return this.reservasService.obtenerReservaPorId(
+      Number(id),
+      request.user.id,
+      request.user.rol,
+    );
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   obtenerReservas(@Req() request: any) {

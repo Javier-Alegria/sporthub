@@ -162,4 +162,37 @@ export class ReservasService {
 
     return this.reservasRepository.save(reserva);
   }
+
+  async obtenerReservaPorId(
+    reservaId: number,
+    usuarioId: number,
+    rol: string,
+  ): Promise<Reserva> {
+    const reserva = await this.reservasRepository.findOne({
+      where: {
+        id: reservaId,
+      },
+      relations: {
+        instalacion: true,
+        usuario: true,
+      },
+    });
+
+    if (!reserva) {
+      throw new NotFoundException('La reserva no existe');
+    }
+
+    if (rol !== 'ADMIN' && reserva.usuarioId !== usuarioId) {
+      throw new ConflictException(
+        'No puedes consultar una reserva de otro usuario',
+      );
+    }
+
+    if (reserva.usuario) {
+      const { password, ...usuarioSinPassword } = reserva.usuario;
+      reserva.usuario = usuarioSinPassword as typeof reserva.usuario;
+    }
+
+    return reserva;
+  }
 }
