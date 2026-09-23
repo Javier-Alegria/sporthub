@@ -10,6 +10,9 @@ import {
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
+  @Matches(/\S/, {
+    message: 'El nombre no puede estar vacío',
+  })
   nombre: string;
 
   @IsNotEmpty()
