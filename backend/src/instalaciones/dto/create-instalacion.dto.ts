@@ -18,6 +18,8 @@ export class CreateInstalacionDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(500)
   descripcion?: string;
 
   @IsNotEmpty()

@@ -21,10 +21,14 @@ export class UpdateInstalacionDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(50)
   tipo?: string;
 
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(100)
   ubicacion?: string;
 
   @IsOptional()
