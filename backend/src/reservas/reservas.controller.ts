@@ -12,6 +12,9 @@ import {
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { ReservasService } from './reservas.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiBearerAuth()
 
 @Controller('reservas')
 export class ReservasController {

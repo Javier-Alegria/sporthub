@@ -13,8 +13,10 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { CreateInstalacionDto } from './dto/create-instalacion.dto';
 import { InstalacionesService } from './instalaciones.service';
-
 import { UpdateInstalacionDto } from './dto/update-instalacion.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiBearerAuth()
 
 @Controller('instalaciones')
 export class InstalacionesController {

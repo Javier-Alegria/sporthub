@@ -15,6 +15,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { RolesGuard } from '../auth/roles.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiBearerAuth()
 
 @Controller('users')
 export class UsersController {
