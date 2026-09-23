@@ -3,11 +3,13 @@ import {
   IsNotEmpty,
   IsNumber,
   Matches,
+  Min,
 } from 'class-validator';
 
 export class CreateReservaDto {
   @IsNotEmpty()
   @IsNumber()
+  @Min(1)
   instalacionId: number;
 
   @IsNotEmpty()
