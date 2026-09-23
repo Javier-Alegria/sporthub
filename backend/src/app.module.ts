@@ -6,6 +6,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { UserService } from './user/user.service';
+import { AuthModule } from './auth/auth.module';
+import { ReservasModule } from './reservas/reservas.module';
+import { InstalacionesModule } from './instalaciones/instalaciones.module';
 
 @Module({
   imports: [
@@ -16,7 +19,6 @@ import { UserService } from './user/user.service';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.get<string>('DB_HOST'),
@@ -24,13 +26,15 @@ import { UserService } from './user/user.service';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-
         autoLoadEntities: true,
         synchronize: true,
       }),
     }),
 
     UsersModule,
+    AuthModule,
+    ReservasModule,
+    InstalacionesModule,
   ],
 
   controllers: [AppController],

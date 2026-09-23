@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Reserva } from '../../reservas/entities/reserva.entity';
 
 @Entity('usuarios')
 export class User {
@@ -27,4 +34,7 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   fechaRegistro: Date;
+
+  @OneToMany(() => Reserva, (reserva) => reserva.usuario)
+  reservas: Reserva[];
 }
