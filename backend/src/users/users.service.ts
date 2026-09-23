@@ -122,4 +122,18 @@ export class UsersService {
 
     return this.obtenerPorId(id);
   }
+
+  async obtenerUsuarios(): Promise<Omit<User, 'password'>[]> {
+    const usuarios = await this.usersRepository.find({
+      order: {
+        id: 'ASC',
+      },
+    });
+
+    return usuarios.map((usuario) => {
+      const { password, ...usuarioSinPassword } = usuario;
+
+      return usuarioSinPassword;
+    });
+  }
 }

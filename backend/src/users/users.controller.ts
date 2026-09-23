@@ -25,6 +25,12 @@ export class UsersController {
     return this.usersService.crearUsuario(user);
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  obtenerUsuarios() {
+    return this.usersService.obtenerUsuarios();
+  }
+
   @Get('perfil')
   @UseGuards(JwtAuthGuard)
   perfil(@Req() request: any) {
